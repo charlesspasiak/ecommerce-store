@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { Expand, ShoppingCart } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 import { Product } from '@/types';
 import IconButton from './icon-button';
@@ -12,8 +13,14 @@ interface Props {
 }
 
 const ProductCard = ({ data }: Props) => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/product/${data?.id}`);
+  }
+
   return (
-    <div className='bg-white group cursor-pointer rounded-xl border p-3 space-y-4'>
+    <div onClick={handleClick} className='bg-white group cursor-pointer rounded-xl border p-3 space-y-4'>
       {/* Images and Actions */}
       <div className='aspect-square rounded-xl bg-gray-100 relative'>
         <Image src={data?.images?.[0]?.url} alt='Image' fill className='aspect-square object-cover rounded-md' />
