@@ -3,10 +3,12 @@
 import Image from 'next/image';
 import { Expand, ShoppingCart } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { MouseEventHandler } from 'react';
 
 import { Product } from '@/types';
 import IconButton from './icon-button';
 import Currency from './currency';
+import usePreviewModal from '@/hooks/use-preview-modal';
 
 interface Props {
   data: Product;
@@ -14,9 +16,16 @@ interface Props {
 
 const ProductCard = ({ data }: Props) => {
   const router = useRouter();
+  const previewModal = usePreviewModal();
 
   const handleClick = () => {
     router.push(`/product/${data?.id}`);
+  }
+
+  const onPreview: MouseEventHandler<HTMLButtonElement> = (event) => {
+    event.stopPropagation();
+
+    previewModal.onOpen(data);
   }
 
   return (
@@ -26,7 +35,7 @@ const ProductCard = ({ data }: Props) => {
         <Image src={data?.images?.[0]?.url} alt='Image' fill className='aspect-square object-cover rounded-md' />
         <div className='opacity-0 group-hover:opacity-100 transition absolute w-full px-6 bottom-5'>
           <div className='flex gap-x-6 justify-center'>
-            <IconButton onClick={() => {}} icon={<Expand size={20} className='text-gray-600' />} />
+            <IconButton onClick={onPreview} icon={<Expand size={20} className='text-gray-600' />} />
             <IconButton onClick={() => {}} icon={<ShoppingCart size={20} className='text-gray-600' />} />
           </div>
         </div>

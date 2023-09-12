@@ -27,7 +27,7 @@ const Info = ({ data }: Props) => {
           </div>
         </div>
         <div className='flex items-center gap-x-4'>
-          <h3 className='font-semibold text-black'>Size:</h3>
+          <h3 className='font-semibold text-black'>Color:</h3>
           <div className='h-6 w-6 rounded-full border border-gray-600' style={{ backgroundColor: data?.color?.value }} />
         </div>
       </div>
