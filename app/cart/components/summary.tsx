@@ -56,7 +56,7 @@ const Summary = () => {
         }
       })
     }
-  }, [token]);
+  }, [token, removeAll]);
 
   useEffect(() => {
     // You can also change below url value to any script url you wish to load, 
@@ -87,7 +87,7 @@ const Summary = () => {
           <Currency value={totalPrice} />
         </div>
       </div>
-      <Button onClick={onCheckout} className='w-full mt-6'>
+      <Button disabled={items.length === 0} onClick={onCheckout} className='w-full mt-6'>
         Checkout
       </Button>
     </div>
